@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 
 import { University } from './schema/universities.schema';
@@ -14,9 +15,10 @@ import { UniversitiesService } from './universities.service';
 export class UniversitiesController {
   constructor(private readonly universitiesService: UniversitiesService) {}
 
+  // paginated universities list
   @Get()
-  async getUniversities() {
-    return this.universitiesService.getUniversities();
+  async getUniversities(@Query('page') page: number) {
+    return this.universitiesService.getUniversities(page);
   }
 
   @Get(':id')

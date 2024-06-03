@@ -11,8 +11,14 @@ export class UniversitiesService {
     private universityModel: mongoose.Model<University>,
   ) {}
 
-  async getUniversities(): Promise<University[]> {
-    return this.universityModel.find().exec();
+  async getUniversities(page: number): Promise<University[]> {
+    const universitiesPerPage = 10;
+    const universities = await this.universityModel
+      .find()
+      .skip((page - 1) * universitiesPerPage)
+      .limit(universitiesPerPage)
+      .exec();
+    return universities;
   }
 
   async getUniversity(universityId: string): Promise<University> {
