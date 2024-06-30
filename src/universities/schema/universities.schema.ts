@@ -1,8 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-@Schema({
-  timestamps: true,
-})
+
 export class Courses_Offered {
   @Prop({ required: true })
   course_name: string;
@@ -74,6 +72,10 @@ export class University_Fees {
   @Prop({ required: true })
   total_fee: number;
 }
+
+@Schema({
+  timestamps: true,
+})
 
 export class University {
   @Prop({ required: true })

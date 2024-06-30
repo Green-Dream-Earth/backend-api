@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UniversitiesModule } from './universities/universities.module';
+import { CommentsModule } from './comments/comments.module';
+
 
 @Module({
   imports: [
@@ -13,8 +15,9 @@ import { UniversitiesModule } from './universities/universities.module';
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
     UniversitiesModule,
+    CommentsModule
   ],
-  controllers: [AppController],
+  controllers: [AppController,],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

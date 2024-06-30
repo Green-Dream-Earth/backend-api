@@ -9,12 +9,20 @@ export class UniversitiesService {
   constructor(
     @InjectModel(University.name)
     private universityModel: mongoose.Model<University>,
-  ) {}
+  ) { }
 
   async getUniversities(page: number): Promise<University[]> {
+    console.log("this is page " + page)
     const universitiesPerPage = 10;
     const universities = await this.universityModel
-      .find()
+      .find({
+        times_rankings: {
+          $exists: true
+        }
+      })
+      .sort({
+        times_rankings: 1
+      })
       .skip((page - 1) * universitiesPerPage)
       .limit(universitiesPerPage)
       .exec();
