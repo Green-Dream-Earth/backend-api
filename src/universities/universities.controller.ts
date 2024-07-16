@@ -17,8 +17,8 @@ export class UniversitiesController {
 
   // paginated universities list
   @Get()
-  async getUniversities(@Query('page') query: number) {
-    return this.universitiesService.getUniversities(query);
+  async getUniversities(@Query('page') query: number, @Query('search') search: string) {
+    return this.universitiesService.getUniversities(query, search);
   }
 
   @Get(':id')
