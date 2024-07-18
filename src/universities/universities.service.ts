@@ -15,7 +15,7 @@ export class UniversitiesService {
     console.log("this is page " + page)
     const universitiesPerPage = 10;
 
-    const regex = new RegExp(search, 'i')
+    const regex = search ? new RegExp(search, 'i') : ""
     console.log("this is regex ", regex)
 
     const universities = await this.universityModel
