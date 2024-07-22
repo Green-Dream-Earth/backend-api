@@ -11,14 +11,26 @@ export class UniversitiesService {
     private universityModel: mongoose.Model<University>,
   ) { }
 
-  async getUniversities(page: number): Promise<University[]> {
+  async getUniversities(page: number, search?: string): Promise<University[]> {
     console.log("this is page " + page)
     const universitiesPerPage = 10;
+
+    const regex = search ? new RegExp(search, 'i') : ""
+    console.log("this is regex ", regex)
+
     const universities = await this.universityModel
       .find({
-        times_rankings: {
-          $exists: true
-        }
+        $and: [
+          {
+            times_rankings: {
+              $exists: true
+            }
+          },
+          {
+             university_name: { $regex: regex } 
+          }
+        ]
+
       })
       .sort({
         times_rankings: 1
